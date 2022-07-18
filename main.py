@@ -14,6 +14,7 @@ def show_module_choices():
     print("1. list all memo items")
     print("2. add or update items")
     print("3. open memo")
+    print("q. Exit program")
     choice = input()
     return choice
 
@@ -94,9 +95,18 @@ def execute_module(db_session, choice):
     elif choice == "3":
         item_name = input("Input memo item name: ")
         open_memo(db_session, item_name)
+    elif choice == "q":
+        print("exiting program...")
+        sys.exit(0)
 
 
 def main():
+    # initialize init folders
+    if not os.path.exists(os.path.join(os.getcwd(), "input")):
+        os.makedirs(os.path.join(os.getcwd(), "input"))
+    if not os.path.exists(os.path.join(os.getcwd(), "output")):
+        os.makedirs(os.path.join(os.getcwd(), "output"))
+
     # check for database
     if not os.path.exists(os.path.join(os.getcwd(), "memo_db")):
         print("Database not found! please provide database!")
